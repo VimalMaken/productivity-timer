@@ -1,7 +1,7 @@
 import "../styles/styles.css";
 import { useState, useEffect, useRef } from "react";
 
-let remaining_Timer, study_Timer, chore_Timer, break_Timer;
+var remaining_Timer, study_Timer, chore_Timer, break_Timer;
 
 function Main({ setPage, userInput, setInsights }) {
   const [choreButton, setChoreButton] = useState(true);
@@ -20,134 +20,153 @@ function Main({ setPage, userInput, setInsights }) {
   const breakTimeMinute = useRef();
   const breakTimeSecond = useRef();
 
-  function stopTimer(timer) {
-    clearInterval(timer);
-  }
+  // let remaining_Timer, study_Timer, chore_Timer, break_Timer;
 
-  function startTimer() {
-    remaining_Timer = setInterval(() => {
-      let hours = parseInt(remainingTimeHour.current.innerText);
-      let minutes = parseInt(remainingTimeMinute.current.innerText);
-      let seconds = parseInt(remainingTimeSecond.current.innerText);
-      if (seconds === 0){ // if 60s is done, subtract 1 from minute and add another 59s
-        if(minutes === 0){ // if minutes are done, subtract 1 from hour and add another 59 minutes
-          if(hours === 0){ // hours is 0, minutes is 0, seconds is 0 
-            stopTimer(remaining_Timer);
-            stopTimer(study_Timer);
-            //go to next page
-          } else { // there are remaining hours
-            remainingTimeHour.current.innerText = hours - 1;
-            remainingTimeMinute.current.innerText = 59;
+  function startTimer(bool) {
+    if(bool) {
+      remaining_Timer = setInterval(() => {
+        let hours = parseInt(remainingTimeHour.current.innerText);
+        let minutes = parseInt(remainingTimeMinute.current.innerText);
+        let seconds = parseInt(remainingTimeSecond.current.innerText);
+        if (seconds === 0){ // if 60s is done, subtract 1 from minute and add another 59s
+          if(minutes === 0){ // if minutes are done, subtract 1 from hour and add another 59 minutes
+            if(hours === 0){ // hours is 0, minutes is 0, seconds is 0 
+              clearInterval(remaining_Timer);
+              clearInterval(study_Timer);
+              //go to next page
+            } else { // there are remaining hours
+              remainingTimeHour.current.innerText = hours - 1;
+              remainingTimeMinute.current.innerText = 59;
+              remainingTimeSecond.current.innerText = 59;
+            }
+          } else { // there are remaining minutes
+            remainingTimeMinute.current.innerText = minutes - 1;
             remainingTimeSecond.current.innerText = 59;
           }
-        } else { // there are remaining minutes
-          remainingTimeMinute.current.innerText = minutes - 1;
-          remainingTimeSecond.current.innerText = 59;
+        } else { // there are remaining seconds
+          remainingTimeSecond.current.innerText = seconds - 1;
         }
-      } else { // there are remaining seconds
-        remainingTimeSecond.current.innerText = seconds - 1;
-      }
-    }, 1000); //runs every second
+      }, 1000); //runs every second
+    }
+    else {
+      clearInterval(remaining_Timer);
+    }
   }
 
-  function studyTimer() {
-    study_Timer = setInterval(() => {
-      let hours = parseInt(studyTimeHour.current.innerText);
-      let minutes = parseInt(studyTimeMinute.current.innerText);
-      let seconds = parseInt(studyTimeSecond.current.innerText);
-      if (seconds === 59){ // if 60s is done, subtract 1 from minute and add another 59s
-        if(minutes === 59){ // if minutes are done, subtract 1 from hour and add another 59 minutes
-            studyTimeHour.current.innerText = hours + 1;
-            studyTimeMinute.current.innerText = 0;
+  function studyTimer(bool) {
+    if(bool) {
+      study_Timer = setInterval(() => {
+        let hours = parseInt(studyTimeHour.current.innerText);
+        let minutes = parseInt(studyTimeMinute.current.innerText);
+        let seconds = parseInt(studyTimeSecond.current.innerText);
+        if (seconds === 59){ // if 60s is done, subtract 1 from minute and add another 59s
+          if(minutes === 59){ // if minutes are done, subtract 1 from hour and add another 59 minutes
+              studyTimeHour.current.innerText = hours + 1;
+              studyTimeMinute.current.innerText = 0;
+              studyTimeSecond.current.innerText = 0;
+          } else { // there are remaining minutes
+            studyTimeMinute.current.innerText = minutes + 1;
             studyTimeSecond.current.innerText = 0;
-        } else { // there are remaining minutes
-          studyTimeMinute.current.innerText = minutes + 1;
-          studyTimeSecond.current.innerText = 0;
+          }
+        } else { // there are remaining seconds
+          studyTimeSecond.current.innerText = seconds + 1;
         }
-      } else { // there are remaining seconds
-        studyTimeSecond.current.innerText = seconds + 1;
-      }
-    }, 1000); //runs every second
+      }, 1000); //runs every second
+    }
+    else{
+      clearInterval(study_Timer);
+    }
   }
 
-  function choreTimer() {
-    chore_Timer = setInterval(() => {
-      let hours = parseInt(choreTimeHour.current.innerText);
-      let minutes = parseInt(choreTimeMinute.current.innerText);
-      let seconds = parseInt(choreTimeSecond.current.innerText);
-      if (seconds === 59){ // if 60s is done, subtract 1 from minute and add another 59s
-        if(minutes === 59){ // if minutes are done, subtract 1 from hour and add another 59 minutes
-          choreTimeHour.current.innerText = hours + 1;
-          choreTimeMinute.current.innerText = 0;
-          choreTimeSecond.current.innerText = 0;
-        } else { // there are remaining minutes
-          choreTimeMinute.current.innerText = minutes + 1;
-          choreTimeSecond.current.innerText = 0;
+  function choreTimer(bool) {
+    if(bool) {
+      chore_Timer = setInterval(() => {
+        let hours = parseInt(choreTimeHour.current.innerText);
+        let minutes = parseInt(choreTimeMinute.current.innerText);
+        let seconds = parseInt(choreTimeSecond.current.innerText);
+        if (seconds === 59){ // if 60s is done, subtract 1 from minute and add another 59s
+          if(minutes === 59){ // if minutes are done, subtract 1 from hour and add another 59 minutes
+            choreTimeHour.current.innerText = hours + 1;
+            choreTimeMinute.current.innerText = 0;
+            choreTimeSecond.current.innerText = 0;
+          } else { // there are remaining minutes
+            choreTimeMinute.current.innerText = minutes + 1;
+            choreTimeSecond.current.innerText = 0;
+          }
+        } else { // there are remaining seconds
+          choreTimeSecond.current.innerText = seconds + 1;
         }
-      } else { // there are remaining seconds
-        choreTimeSecond.current.innerText = seconds + 1;
-      }
-    }, 1000); //runs every second
+      }, 1000); //runs every second
+    }
+    else {
+      clearInterval(chore_Timer);
+    }
   }
 
-  function breakTimer() {
-    break_Timer = setInterval(() => {
-      let hours = parseInt(breakTimeHour.current.innerText);
-      let minutes = parseInt(breakTimeMinute.current.innerText);
-      let seconds = parseInt(breakTimeSecond.current.innerText);
-      if (seconds === 59){ // if 60s is done, subtract 1 from minute and add another 59s
-        if(minutes === 59){ // if minutes are done, subtract 1 from hour and add another 59 minutes
-          breakTimeHour.current.innerText = hours + 1;
-          breakTimeMinute.current.innerText = 0;
-          breakTimeSecond.current.innerText = 0;
-        } else { // there are remaining minutes
-          breakTimeMinute.current.innerText = minutes + 1;
-          breakTimeSecond.current.innerText = 0;
+  function breakTimer(bool) {
+    if(bool) {
+      break_Timer = setInterval(() => {
+        let hours = parseInt(breakTimeHour.current.innerText);
+        let minutes = parseInt(breakTimeMinute.current.innerText);
+        let seconds = parseInt(breakTimeSecond.current.innerText);
+        if (seconds === 59){ // if 60s is done, subtract 1 from minute and add another 59s
+          if(minutes === 59){ // if minutes are done, subtract 1 from hour and add another 59 minutes
+            breakTimeHour.current.innerText = hours + 1;
+            breakTimeMinute.current.innerText = 0;
+            breakTimeSecond.current.innerText = 0;
+          } else { // there are remaining minutes
+            breakTimeMinute.current.innerText = minutes + 1;
+            breakTimeSecond.current.innerText = 0;
+          }
+        } else { // there are remaining seconds
+          breakTimeSecond.current.innerText = seconds + 1;
         }
-      } else { // there are remaining seconds
-        breakTimeSecond.current.innerText = seconds + 1;
-      }
-    }, 1000); //runs every second
+      }, 1000); //runs every second
+    }
+    else {
+      clearInterval(break_Timer);
+    }
   }
 
   function startChores() {
     setChoreButton(false);
     setBreakButton(true);
-    stopTimer(remaining_Timer);
-    stopTimer(study_Timer);
-    stopTimer(break_Timer);
-    choreTimer();
+    startTimer(false);
+    studyTimer(false);
+    breakTimer(false);
+    choreTimer(true);
   }
 
   function stopChores() {
     setChoreButton(true);
-    stopTimer(chore_Timer);
-    startTimer();
-    studyTimer();
+    startTimer(true);
+    studyTimer(true);
+    breakTimer(false);
+    choreTimer(false);
   }
 
   function startBreak() {
     setChoreButton(true);
     setBreakButton(false);
-    stopTimer(remaining_Timer);
-    stopTimer(study_Timer);
-    stopTimer(chore_Timer);
-    breakTimer();
+    startTimer(false);
+    studyTimer(false);
+    breakTimer(true);
+    choreTimer(false);
   }
 
   function stopBreak() {
     setBreakButton(true);
-    stopTimer(break_Timer);
-    startTimer();
-    studyTimer();
+    startTimer(true);
+    studyTimer(true);
+    breakTimer(false);
+    choreTimer(false);
   }
 
   function leaveMain() {
-    stopTimer(remaining_Timer);
-    stopTimer(study_Timer);
-    stopTimer(chore_Timer);
-    stopTimer(break_Timer);
-
+    startTimer(false);
+    studyTimer(false);
+    breakTimer(false);
+    choreTimer(false);
     //LEAVE
   }
 
@@ -164,8 +183,8 @@ function Main({ setPage, userInput, setInsights }) {
     breakTimeHour.current.innerText = 0;
     breakTimeMinute.current.innerText = 0;
     breakTimeSecond.current.innerText = 0;
-    startTimer();
-    studyTimer();
+    startTimer(true);
+    studyTimer(true);
   }, []);
 
   return ( //TODO: make ui look better to match mockup design
