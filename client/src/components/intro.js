@@ -1,5 +1,6 @@
 import { useRef, useState, useEffect } from "react";
 import '../styles/styles.css';
+import {ReactComponent as Done} from "../assets/done.svg";
 
 function Intro({ setPage, setUserInput }) {
   let temp = [];
@@ -255,7 +256,7 @@ function Intro({ setPage, setUserInput }) {
           <p>Seconds</p>
         </div>
       </div>
-      <p className="button" ref={buttonRef}>Continue</p>
+      <Done className="button" ref={buttonRef} />
     </div>
   );
 }

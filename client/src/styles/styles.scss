@@ -78,13 +78,10 @@ body {
         }
     }
     .button {
-        font-size: 80px;
-        font-weight:600;
-        margin: 10px;
+        height: 100px;
+        width: 100px;
+        margin: 50px;
         cursor: pointer;
-        &:hover {
-            font-size: 81px;
-        }
     }
 }
 
@@ -123,10 +120,19 @@ body {
     .alt-time {
         display: flex;
         flex-direction: row;
+        align-items: center;
         p {
             font-size: 30px;
             margin: 15px;
         }
+        .icon {
+            height: 50px;
+            width: 50px;
+            cursor: pointer;
+        }
+    }
+    .continue {
+        margin: 50px;
     }
 }
 

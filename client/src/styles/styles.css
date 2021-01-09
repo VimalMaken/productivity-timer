@@ -101,14 +101,10 @@ body {
 }
 
 .intro .button {
-  font-size: 80px;
-  font-weight: 600;
-  margin: 10px;
+  height: 100px;
+  width: 100px;
+  margin: 50px;
   cursor: pointer;
-}
-
-.intro .button:hover {
-  font-size: 81px;
 }
 
 .main {
@@ -180,10 +176,23 @@ body {
   -webkit-box-direction: normal;
       -ms-flex-direction: row;
           flex-direction: row;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
 }
 
 .main .alt-time p {
   font-size: 30px;
   margin: 15px;
+}
+
+.main .alt-time .icon {
+  height: 50px;
+  width: 50px;
+  cursor: pointer;
+}
+
+.main .continue {
+  margin: 50px;
 }
 /*# sourceMappingURL=styles.css.map */

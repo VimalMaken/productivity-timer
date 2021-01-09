@@ -1,5 +1,8 @@
 import "../styles/styles.css";
 import { useState, useEffect, useRef } from "react";
+import {ReactComponent as Stop} from "../assets/stop.svg";
+import {ReactComponent as Play} from "../assets/play.svg";
+import {ReactComponent as Replay} from "../assets/replay.svg";
 
 var remaining_Timer, study_Timer, chore_Timer, break_Timer;
 
@@ -33,7 +36,11 @@ function Main({ setPage, userInput, setInsights }) {
             if(hours === 0){ // hours is 0, minutes is 0, seconds is 0 
               clearInterval(remaining_Timer);
               clearInterval(study_Timer);
-              //go to next page
+              let array1 = [parseInt(studyTimeHour.current.innerText), parseInt(studyTimeMinute.current.innerText), parseInt(studyTimeSecond.current.innerText)];
+              let array2 = [parseInt(choreTimeHour.current.innerText), parseInt(choreTimeMinute.current.innerText), parseInt(choreTimeSecond.current.innerText)];
+              let array3 = [parseInt(breakTimeHour.current.innerText), parseInt(breakTimeMinute.current.innerText), parseInt(breakTimeSecond.current.innerText)];
+              setInsights([array1,array2,array3]);
+              setPage([false,false,true]);
             } else { // there are remaining hours
               remainingTimeHour.current.innerText = hours - 1;
               remainingTimeMinute.current.innerText = 59;
@@ -167,7 +174,11 @@ function Main({ setPage, userInput, setInsights }) {
     studyTimer(false);
     breakTimer(false);
     choreTimer(false);
-    //LEAVE
+    let array1 = [parseInt(studyTimeHour.current.innerText), parseInt(studyTimeMinute.current.innerText), parseInt(studyTimeSecond.current.innerText)];
+    let array2 = [parseInt(choreTimeHour.current.innerText), parseInt(choreTimeMinute.current.innerText), parseInt(choreTimeSecond.current.innerText)];
+    let array3 = [parseInt(breakTimeHour.current.innerText), parseInt(breakTimeMinute.current.innerText), parseInt(breakTimeSecond.current.innerText)];
+    setInsights([array1,array2,array3]);
+    setPage([false,false,true]);
   }
 
   useEffect(() => {
@@ -212,20 +223,21 @@ function Main({ setPage, userInput, setInsights }) {
         <p><strong>Chores</strong> - <span ref={choreTimeHour}></span> : <span ref={choreTimeMinute}></span> : <span ref={choreTimeSecond}></span></p>
         {
           choreButton ?
-            <p onClick={() => startChores()}>Start</p>
+            <Play className="icon" onClick={() => startChores()} />
           :
-            <p onClick={() => stopChores()}>Stop</p>
+            <Stop className="icon" onClick={() => stopChores()} />
         }
       </div>
       <div className="alt-time">
         <p><strong>Break</strong> - <span ref={breakTimeHour}></span> : <span ref={breakTimeMinute}></span> : <span ref={breakTimeSecond}></span></p>
         {
           breakButton ?
-            <p onClick={() => startBreak()}>Start</p>
+            <Play className="icon" onClick={() => startBreak()} />
           :
-            <p onClick={() => stopBreak()}>Stop</p>
+            <Stop className="icon" onClick={() => stopBreak()} />
         }
       </div>
+      <Replay className="continue" onClick={() => leaveMain()}/>
     </div>
   );
 }
