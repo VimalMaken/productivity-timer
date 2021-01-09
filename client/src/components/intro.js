@@ -14,6 +14,7 @@ function Intro({ setPage, setUserInput }) {
   const var_22 = useRef();
   const var_31 = useRef();
   const var_32 = useRef();
+  const buttonRef = useRef();
 
   useEffect(() => {
     //go to user file here
@@ -136,6 +137,10 @@ function Intro({ setPage, setUserInput }) {
         setThree(temp[2] + 1);
       }
     });
+    buttonRef.current.addEventListener('click', (event) => {
+      setUserInput([temp[0],temp[1],temp[2]]);
+      setPage([false, true, false]);
+    });
   }, []);
 
   function setOne(number){
@@ -203,25 +208,25 @@ function Intro({ setPage, setUserInput }) {
       <p className="title">How long do you want to study for?</p>
       <div className="timeWheel">
         <div className="scroll" ref={wheel1}>
-          <p ref={var_11}></p>
+          <p ref={var_11} className="pointer"></p>
           <p className="active">{preset[0]}</p>
-          <p ref={var_12}></p>
+          <p ref={var_12} className="pointer"></p>
           <p>Hours</p>
         </div>
         <div className="scroll" ref={wheel2}>
-          <p ref={var_21}></p>
+          <p ref={var_21} className="pointer"></p>
           <p className="active">{preset[1]}</p>
-          <p ref={var_22}></p>
+          <p ref={var_22} className="pointer"></p>
           <p>Minutes</p>
         </div>
         <div className="scroll" ref={wheel3}>
-          <p ref={var_31}></p>
+          <p ref={var_31} className="pointer"></p>
           <p className="active">{preset[2]}</p>
-          <p ref={var_32}></p>
+          <p ref={var_32} className="pointer"></p>
           <p>Seconds</p>
         </div>
       </div>
-      <p>Continue</p>
+      <p className="button" ref={buttonRef}>Continue</p>
     </div>
   );
 }

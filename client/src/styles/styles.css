@@ -32,14 +32,33 @@
 
 body {
   font-family: 'Heebo', sans-serif;
+  margin: 0;
 }
 
 .intro {
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  -webkit-transform: translate(-50%, -50%);
-          transform: translate(-50%, -50%);
+  height: 100vh;
+  width: 100vw;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+}
+
+.intro .title {
+  font-size: 80px;
+  font-weight: 800;
+  max-width: 20ch;
+  text-align: center;
+  margin: 10px;
 }
 
 .intro .timeWheel {
@@ -69,9 +88,26 @@ body {
 .intro .timeWheel .scroll p {
   margin: 0;
   padding: 15px;
+  font-size: 40px;
 }
 
 .intro .timeWheel .scroll .active {
-  background-color: yellow;
+  font-weight: 800;
+  font-size: 50px;
+}
+
+.intro .timeWheel .scroll .pointer {
+  cursor: pointer;
+}
+
+.intro .button {
+  font-size: 80px;
+  font-weight: 600;
+  margin: 10px;
+  cursor: pointer;
+}
+
+.intro .button:hover {
+  font-size: 81px;
 }
 /*# sourceMappingURL=styles.css.map */
