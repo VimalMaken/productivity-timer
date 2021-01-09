@@ -18,16 +18,45 @@ function Intro({ setPage, setUserInput }) {
 
   useEffect(() => {
     //go to user file here
-    let array = [3,25,45]
+    let array = [0,0,45]
     setPreset(array);
     temp = array;
-
-    var_11.current.innerText = array[0] - 1;
-    var_12.current.innerText = array[0] + 1;
-    var_21.current.innerText = array[1] - 1;
-    var_22.current.innerText = array[1] + 1;
-    var_31.current.innerText = array[2] - 1;
-    var_32.current.innerText = array[2] + 1;
+    if(array[0] === 0) {
+      var_11.current.innerText = 23;
+      var_12.current.innerText = array[0] + 1;
+    }
+    else if (array[0] === 23) {
+      var_11.current.innerText = array[0] - 1;
+      var_12.current.innerText = 0;
+    }
+    else {
+      var_11.current.innerText = array[0] - 1;
+      var_12.current.innerText = array[0] + 1;
+    }
+    if(array[1] === 0) {
+      var_21.current.innerText = 59;
+      var_22.current.innerText = array[1] + 1;
+    }
+    else if (array[1] === 59) {
+      var_21.current.innerText = array[1] - 1;
+      var_22.current.innerText = 0;
+    }
+    else {
+      var_21.current.innerText = array[1] - 1;
+      var_22.current.innerText = array[1] + 1;
+    }
+    if(array[2] === 0) {
+      var_31.current.innerText = 59;
+      var_32.current.innerText = array[2] + 1;
+    }
+    else if (array[2] === 59) {
+      var_31.current.innerText = array[2] - 1;
+      var_32.current.innerText = 0;
+    }
+    else {
+      var_31.current.innerText = array[2] - 1;
+      var_32.current.innerText = array[2] + 1;
+    }
 
     wheel1.current.addEventListener('wheel', (event) => {
       if(event.deltaY < 0) {

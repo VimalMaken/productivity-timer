@@ -1,8 +1,11 @@
 import "../styles/styles.css";
 import { useState, useEffect, useRef } from "react";
 
+let remaining_Timer, study_Timer, chore_Timer, break_Timer;
+
 function Main({ setPage, userInput, setInsights }) {
-  const [button, setButton] = useState(false);
+  const [choreButton, setChoreButton] = useState(true);
+  const [breakButton, setBreakButton] = useState(true);
 
   const remainingTimeHour = useRef();
   const remainingTimeMinute = useRef();
@@ -10,24 +13,28 @@ function Main({ setPage, userInput, setInsights }) {
   const studyTimeHour = useRef();
   const studyTimeMinute = useRef();
   const studyTimeSecond = useRef();
-
-  const [studyTime, setStudyTime] = useState([0,0,0]);
-  const [choreTime, setChoreTime] = useState([0,0,0]);
-  const [breakTime, setBreakTime] = useState([0,0,0]);
+  const choreTimeHour = useRef();
+  const choreTimeMinute = useRef();
+  const choreTimeSecond = useRef();
+  const breakTimeHour = useRef();
+  const breakTimeMinute = useRef();
+  const breakTimeSecond = useRef();
 
   function stopTimer(timer) {
     clearInterval(timer);
   }
 
   function startTimer() {
-    const totalTime = setInterval(() => {
+    remaining_Timer = setInterval(() => {
       let hours = parseInt(remainingTimeHour.current.innerText);
       let minutes = parseInt(remainingTimeMinute.current.innerText);
       let seconds = parseInt(remainingTimeSecond.current.innerText);
       if (seconds === 0){ // if 60s is done, subtract 1 from minute and add another 59s
         if(minutes === 0){ // if minutes are done, subtract 1 from hour and add another 59 minutes
           if(hours === 0){ // hours is 0, minutes is 0, seconds is 0 
-            stopTimer(totalTime);
+            stopTimer(remaining_Timer);
+            stopTimer(study_Timer);
+            //go to next page
           } else { // there are remaining hours
             remainingTimeHour.current.innerText = hours - 1;
             remainingTimeMinute.current.innerText = 59;
@@ -44,7 +51,7 @@ function Main({ setPage, userInput, setInsights }) {
   }
 
   function studyTimer() {
-    const totalTime = setInterval(() => {
+    study_Timer = setInterval(() => {
       let hours = parseInt(studyTimeHour.current.innerText);
       let minutes = parseInt(studyTimeMinute.current.innerText);
       let seconds = parseInt(studyTimeSecond.current.innerText);
@@ -63,6 +70,55 @@ function Main({ setPage, userInput, setInsights }) {
     }, 1000); //runs every second
   }
 
+  function choreTimer() {
+
+  }
+
+  function breakTimer() {
+
+  }
+
+  function startChores() {
+    setChoreButton(false);
+    setBreakButton(true);
+    // stopTimer(remaining_Timer);
+    // stopTimer(study_Timer);
+    // stopTimer(break_Timer);
+    // choreTimer();
+  }
+
+  function stopChores() {
+    setChoreButton(true);
+    // stopTimer(chore_Timer);
+    // startTimer();
+    // studyTimer();
+  }
+
+  function startBreak() {
+    setChoreButton(true);
+    setBreakButton(false);
+    // stopTimer(remaining_Timer);
+    // stopTimer(study_Timer);
+    // stopTimer(chore_Timer);
+    // breakTimer();
+  }
+
+  function stopBreak() {
+    setBreakButton(true);
+    // stopTimer(break_Timer);
+    // startTimer();
+    // studyTimer();
+  }
+
+  function leaveMain() {
+    stopTimer(remaining_Timer);
+    stopTimer(study_Timer);
+    stopTimer(chore_Timer);
+    stopTimer(break_Timer);
+
+    //LEAVE
+  }
+
   useEffect(() => {
     remainingTimeHour.current.innerText = userInput[0];
     remainingTimeMinute.current.innerText = userInput[1];
@@ -70,6 +126,12 @@ function Main({ setPage, userInput, setInsights }) {
     studyTimeHour.current.innerText = 0;
     studyTimeMinute.current.innerText = 0;
     studyTimeSecond.current.innerText = 0;
+    choreTimeHour.current.innerText = 0;
+    choreTimeMinute.current.innerText = 0;
+    choreTimeSecond.current.innerText = 0;
+    breakTimeHour.current.innerText = 0;
+    breakTimeMinute.current.innerText = 0;
+    breakTimeSecond.current.innerText = 0;
     startTimer();
     studyTimer();
   }, []);
@@ -96,34 +158,25 @@ function Main({ setPage, userInput, setInsights }) {
         <p><strong>Study time</strong> - <span ref={studyTimeHour}></span> : <span ref={studyTimeMinute}></span> : <span ref={studyTimeSecond}></span></p>
       </div>
       <div className="alt-time">
-        <p><strong>Chores</strong> - {choreTime[0]} : {choreTime[1]} : {choreTime[2]}</p>
-        <p>Start</p>
+        <p><strong>Chores</strong> - <span ref={choreTimeHour}></span> : <span ref={choreTimeMinute}></span> : <span ref={choreTimeSecond}></span></p>
+        {
+          choreButton ?
+            <p onClick={() => startChores()}>Start</p>
+          :
+            <p onClick={() => stopChores()}>Stop</p>
+        }
       </div>
       <div className="alt-time">
-        <p><strong>Break</strong> - {breakTime[0]} : {breakTime[1]} : {breakTime[2]}</p>
-        <p>Start</p>
+        <p><strong>Break</strong> - <span ref={breakTimeHour}></span> : <span ref={breakTimeMinute}></span> : <span ref={breakTimeSecond}></span></p>
+        {
+          breakButton ?
+            <p onClick={() => startBreak()}>Start</p>
+          :
+            <p onClick={() => stopBreak()}>Stop</p>
+        }
       </div>
     </div>
   );
 }
 
 export default Main;
-
-//   const changeButtonText = ( // used for changing between start/stop button
-//     if(buttonText == "Start"){
-//         newButtonText = "Stop";
-//     }else{ // button is currently set to "Stop"
-//         newButtonText = "Start";
-//     }  
-//     text) => setButtonText(newButtonText);
-
-
-//   const choresButton = {
-//     return (
-//         <Button onClick={() => changeButtonText()}>{buttonText}</Button>
-//       )
-//   }
-
-//   const breaKButton ={
-
-//   }
