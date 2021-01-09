@@ -1,2 +1,5 @@
 delete react-router-dom in app.js once done
 in intro.js, use the timer
+
+give stop conditions for main.js
+can probably add stop conditions by making let variables outside of react scope
