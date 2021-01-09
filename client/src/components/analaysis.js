@@ -1,5 +1,4 @@
 import '../styles/styles.css';
-import { Redirect } from "react-router-dom";
 
 
 function Analysis({ setPage, insights }) {
@@ -13,7 +12,7 @@ function Analysis({ setPage, insights }) {
           <p>Break: {insights[2]}</p>  
           <p> Insights: {console.log("some message")}</p> 
           <button onClick = {() => { 
-              return <Redirect to={"/main"} />
+              
           }}>RESET</button>
       </div>
     );

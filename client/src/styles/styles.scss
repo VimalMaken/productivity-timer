@@ -88,6 +88,47 @@ body {
     }
 }
 
+.main {
+    height: 100vh;
+    width: 100vw;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    .time-remaining {
+        display: flex;
+        flex-direction: row;
+        margin: 50px 0;
+        .time-column {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            margin: 0 50px;
+            .title-time {
+                font-size: 80px;
+                font-weight: 800;
+                margin: 0;
+            }
+        }
+        .colon {
+            font-weight: 800;
+            font-size: 60px;
+            transform: translateY(10px);
+        }
+        p {
+            font-size: 40px;
+            margin: 0;
+        }
+    }
+    .alt-time {
+        display: flex;
+        flex-direction: row;
+        p {
+            font-size: 30px;
+            margin: 15px;
+        }
+    }
+}
 
 
 //Exception
