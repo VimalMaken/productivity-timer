@@ -71,43 +71,75 @@ function Main({ setPage, userInput, setInsights }) {
   }
 
   function choreTimer() {
-
+    chore_Timer = setInterval(() => {
+      let hours = parseInt(choreTimeHour.current.innerText);
+      let minutes = parseInt(choreTimeMinute.current.innerText);
+      let seconds = parseInt(choreTimeSecond.current.innerText);
+      if (seconds === 59){ // if 60s is done, subtract 1 from minute and add another 59s
+        if(minutes === 59){ // if minutes are done, subtract 1 from hour and add another 59 minutes
+          choreTimeHour.current.innerText = hours + 1;
+          choreTimeMinute.current.innerText = 0;
+          choreTimeSecond.current.innerText = 0;
+        } else { // there are remaining minutes
+          choreTimeMinute.current.innerText = minutes + 1;
+          choreTimeSecond.current.innerText = 0;
+        }
+      } else { // there are remaining seconds
+        choreTimeSecond.current.innerText = seconds + 1;
+      }
+    }, 1000); //runs every second
   }
 
   function breakTimer() {
-
+    break_Timer = setInterval(() => {
+      let hours = parseInt(breakTimeHour.current.innerText);
+      let minutes = parseInt(breakTimeMinute.current.innerText);
+      let seconds = parseInt(breakTimeSecond.current.innerText);
+      if (seconds === 59){ // if 60s is done, subtract 1 from minute and add another 59s
+        if(minutes === 59){ // if minutes are done, subtract 1 from hour and add another 59 minutes
+          breakTimeHour.current.innerText = hours + 1;
+          breakTimeMinute.current.innerText = 0;
+          breakTimeSecond.current.innerText = 0;
+        } else { // there are remaining minutes
+          breakTimeMinute.current.innerText = minutes + 1;
+          breakTimeSecond.current.innerText = 0;
+        }
+      } else { // there are remaining seconds
+        breakTimeSecond.current.innerText = seconds + 1;
+      }
+    }, 1000); //runs every second
   }
 
   function startChores() {
     setChoreButton(false);
     setBreakButton(true);
-    // stopTimer(remaining_Timer);
-    // stopTimer(study_Timer);
-    // stopTimer(break_Timer);
-    // choreTimer();
+    stopTimer(remaining_Timer);
+    stopTimer(study_Timer);
+    stopTimer(break_Timer);
+    choreTimer();
   }
 
   function stopChores() {
     setChoreButton(true);
-    // stopTimer(chore_Timer);
-    // startTimer();
-    // studyTimer();
+    stopTimer(chore_Timer);
+    startTimer();
+    studyTimer();
   }
 
   function startBreak() {
     setChoreButton(true);
     setBreakButton(false);
-    // stopTimer(remaining_Timer);
-    // stopTimer(study_Timer);
-    // stopTimer(chore_Timer);
-    // breakTimer();
+    stopTimer(remaining_Timer);
+    stopTimer(study_Timer);
+    stopTimer(chore_Timer);
+    breakTimer();
   }
 
   function stopBreak() {
     setBreakButton(true);
-    // stopTimer(break_Timer);
-    // startTimer();
-    // studyTimer();
+    stopTimer(break_Timer);
+    startTimer();
+    studyTimer();
   }
 
   function leaveMain() {
