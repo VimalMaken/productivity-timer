@@ -1,2 +1,0 @@
-do electron, bundle
-in intro.js, grab inputs and set outputs to text/json file

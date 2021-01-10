@@ -16,7 +16,9 @@
     "build": "react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject",
-    "electron": "electron ."
+    "electron": "electron .",
+    "pack": "electron-builder --dir",
+    "dist": "electron-builder"
   },
   "eslintConfig": {
     "extends": [
@@ -35,5 +37,18 @@
       "last 1 firefox version",
       "last 1 safari version"
     ]
+  },
+  "devDependencies": {
+    "electron": "^11.1.1",
+    "electron-builder": "^22.9.1"
+  },
+  "main": "./public/main.js",
+  "homepage": ".",
+  "build": {
+    "appId": "testing",
+    "win": {
+      "target": "NSIS",
+      "icon": "./build/logo.ico"
+    }
   }
 }

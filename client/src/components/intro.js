@@ -2,6 +2,9 @@ import { useRef, useState, useEffect } from "react";
 import '../styles/styles.css';
 import {ReactComponent as Done} from "../assets/done.svg";
 
+const electron = window.require('electron');
+const ipcRenderer = electron.ipcRenderer;
+
 function Intro({ setPage, setUserInput }) {
   let temp = [];
   const [preset, setPreset] = useState([0,0,0]);
@@ -18,8 +21,7 @@ function Intro({ setPage, setUserInput }) {
   const buttonRef = useRef();
 
   useEffect(() => {
-    //go to user file here
-    let array = [0,0,45]
+    let array = ipcRenderer.sendSync('load-time');
     setPreset(array);
     temp = array;
     if(array[0] === 0) {
@@ -168,6 +170,7 @@ function Intro({ setPage, setUserInput }) {
       }
     });
     buttonRef.current.addEventListener('click', (event) => {
+      ipcRenderer.sendSync('save-time', [temp[0], temp[1], temp[2]]);
       setUserInput([temp[0],temp[1],temp[2]]);
       setPage([false, true, false]);
     });
