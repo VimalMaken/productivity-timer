@@ -2,7 +2,6 @@ import "../styles/styles.css";
 import { useState, useEffect, useRef } from "react";
 import {ReactComponent as Stop} from "../assets/stop.svg";
 import {ReactComponent as Play} from "../assets/play.svg";
-import {ReactComponent as Replay} from "../assets/replay.svg";
 
 var remaining_Timer, study_Timer, chore_Timer, break_Timer;
 
@@ -237,7 +236,7 @@ function Main({ setPage, userInput, setInsights }) {
             <Stop className="icon" onClick={() => stopBreak()} />
         }
       </div>
-      <Replay className="continue" onClick={() => leaveMain()}/>
+      <Stop className="continue" onClick={() => leaveMain()}/>
     </div>
   );
 }

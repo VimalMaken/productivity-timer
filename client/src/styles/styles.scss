@@ -1,5 +1,4 @@
-//Composition
-
+//FONTS
 /* heebo-200 - latin */
 @font-face {
     font-family: 'Heebo';
@@ -33,9 +32,11 @@
          url('../fonts/heebo-v9-latin-800.woff2') format('woff2');
 }
 
+//Composition
 body {
     font-family: 'Heebo', sans-serif;
     margin: 0;
+    font-size: 40px;
 }
 
 //Utility
@@ -66,7 +67,6 @@ body {
             p {
                 margin: 0;
                 padding: 15px;
-                font-size: 40px;
             }
             .active {
                 font-weight: 800;
@@ -113,7 +113,6 @@ body {
             transform: translateY(10px);
         }
         p {
-            font-size: 40px;
             margin: 0;
         }
     }
@@ -133,6 +132,32 @@ body {
     }
     .continue {
         margin: 50px;
+        height: 100px;
+        width: 100px;
+    }
+}
+
+.analysis {
+    height: 100vh;
+    width: 100vw;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    .title {
+        font-size: 80px;
+        font-weight: 800;
+        margin: 20px;
+    }
+    .results {
+        .results-row {
+            display: flex;
+            flex-direction: row;
+            justify-content: space-between;
+            p {
+                margin: 0 50px;
+            }
+        }
     }
 }
 
