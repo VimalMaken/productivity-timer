@@ -38,12 +38,12 @@ app.on('activate', function () {
 });
 
 ipcMain.on('load-time', (event) => {
-    let file = fs.readFileSync(path.join(__dirname, '/../src/assets/time.json'));
+    let file = fs.readFileSync(path.join(__dirname, 'time.json'));
     let data = JSON.parse(file);
     event.returnValue = data;
 })
 
 ipcMain.on('save-time', (event, time) => {
-    fs.writeFileSync(path.join(__dirname, '/../src/assets/time.json'), JSON.stringify(time));
+    fs.writeFileSync(path.join(__dirname, 'time.json'), JSON.stringify(time));
     event.returnValue = 'success';
 })

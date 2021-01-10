@@ -42,7 +42,7 @@
     "electron": "^11.1.1",
     "electron-builder": "^22.9.1"
   },
-  "main": "./public/main.js",
+  "main": "./public/electron.js",
   "homepage": ".",
   "build": {
     "appId": "testing",
